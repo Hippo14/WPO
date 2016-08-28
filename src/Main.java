@@ -1,4 +1,4 @@
-import Algorithm.image.bmp.decode.BmpDecode;
+import Algorithm.image.bmp.read.Read;
 import Algorithm.image.bmp.encode.BmpEncode;
 import Algorithm.bin_morf.*;
 import Algorithm.bin_oper_logicz.LogicalNegation;
@@ -63,7 +63,7 @@ public class Main extends Application {
 
     public BMPFile bmpFile;
 
-    BmpDecode bmpDecode;
+    Read read;
 
     public static void main(String[] args) {
         launch(args);
@@ -251,10 +251,6 @@ public class Main extends Application {
 
             open.setOnAction(event -> {
                 FileChooser fileChooser = new FileChooser();
-                fileChooser.getExtensionFilters().addAll(
-                        new FileChooser.ExtensionFilter("Windows Bitmap", "*.bmp")
-                );
-                fileChooser.setInitialDirectory(file.getParentFile());
 
 
                 //Set to user directory or go to default if cannot access
@@ -273,8 +269,8 @@ public class Main extends Application {
                     try {
                         dis = new DataInputStream(new FileInputStream(sDir));
 
-                        bmpDecode = new BmpDecode(dis);
-                        bmpFile = new BMPFile(bmpDecode.getBmpHeader(), bmpDecode.getBufferedImage());
+                        read = new Read(dis);
+                        bmpFile = new BMPFile(read.getHeader(), read.getImage());
                         iv1.setImage(SwingFXUtils.toFXImage(bmpFile.getBufferedImage(), null));
                         addToHistory(bmpFile.getBufferedImage(), "New BMP image");
                     } catch (Exception e) {

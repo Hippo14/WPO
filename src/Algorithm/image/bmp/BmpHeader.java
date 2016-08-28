@@ -1,6 +1,6 @@
 package Algorithm.image.bmp;
 
-import Algorithm.image.bmp.decode.LitEndInputStream;
+import Algorithm.image.bmp.read.LitEndInputStream;
 
 import java.io.IOException;
 
@@ -9,6 +9,7 @@ import java.io.IOException;
  */
 public class BmpHeader {
 
+    String signature;
     int size;
     short reserved1;
     short reserved2;
@@ -26,6 +27,7 @@ public class BmpHeader {
     int numberOfImportantColors;
 
     public BmpHeader(BmpHeader header) {
+        this.signature = header.getSignature();
         this.size = header.getSize();
         this.reserved1 = header.getReserved1();
         this.reserved2 = header.getReserved2();
@@ -52,13 +54,20 @@ public class BmpHeader {
     int colorsImportant;
 
     public BmpHeader(LitEndInputStream input) throws IOException {
-        readFileHeader()
-
-
-        init(litEndInputStream);
+        readSignature(input);
+        read(input);
     }
 
-    private void init(LitEndInputStream i) throws IOException {
+    private void readSignature(LitEndInputStream input) throws IOException {
+        byte[] bSignature = new byte[2];
+        input.read(bSignature);
+        String signature = new String(bSignature, "UTF-8");
+
+        if (!"BM".equals(signature))
+            throw new IOException("Niepoprawna sygnatura " + signature);
+    }
+
+    private void read(LitEndInputStream i) throws IOException {
         size = i.readInt();
         reserved1 = i.readShort();
         reserved2 = i.readShort();
@@ -220,4 +229,7 @@ public class BmpHeader {
     }
 
 
+    public String getSignature() {
+        return signature;
+    }
 }

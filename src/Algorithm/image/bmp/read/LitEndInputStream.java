@@ -1,6 +1,4 @@
-package Algorithm.image.bmp.decode;
-
-import sun.misc.IOUtils;
+package Algorithm.image.bmp.read;
 
 import java.io.*;
 
