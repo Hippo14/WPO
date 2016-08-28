@@ -1,4 +1,4 @@
-package Algorithm.BmpNew;
+package Algorithm.image.bmp;
 
 import java.io.DataOutputStream;
 import java.io.FilterOutputStream;

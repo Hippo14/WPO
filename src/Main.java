@@ -1,5 +1,5 @@
-import Algorithm.BmpNew.decode.BmpDecode;
-import Algorithm.BmpNew.encode.BmpEncode;
+import Algorithm.image.bmp.decode.BmpDecode;
+import Algorithm.image.bmp.encode.BmpEncode;
 import Algorithm.bin_morf.*;
 import Algorithm.bin_oper_logicz.LogicalNegation;
 import Algorithm.bin_oper_logicz.LogicalProduct;
@@ -14,8 +14,7 @@ import Algorithm.filters.*;
 import Algorithm.gray_hist.*;
 import Algorithm.gray_morf.*;
 import Algorithm.oper_geometr.*;
-import BMP.BMPFile;
-import BMP.ImageBMP;
+import Algorithm.image.bmp.BMPFile;
 import javafx.application.*;
 
 import javafx.collections.FXCollections;
@@ -43,7 +42,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
@@ -239,19 +237,13 @@ public class Main extends Application {
     public class MenuFile extends MyMenu {
 
         MenuItem openBMP = setOpenBMP("Open BMP", null),
-//            open = setOpen("Open", null),
-//            openAsBinary = setOpenAs(BufferedImage.TYPE_BYTE_BINARY, "Open As Binary", null),
-//            openAsGray = setOpenAs(BufferedImage.TYPE_BYTE_GRAY, "Open As Gray", null),
-//            openAsRGB = setOpenAs(BufferedImage.TYPE_INT_RGB, "Open as RGB", null),
-//            save = setSave("Save", null),
-//            saveAs = setSaveAs("Save As...", null),
             saveAsBMP = setSaveBMP("Save As BMP", null),
             exit = setExit("Exit", null);
 
         public MenuFile(String name) {
             super(name);
 
-            this.getItems().addAll(openBMP, /*open, openAsBinary, openAsGray, openAsRGB, save, saveAs,*/ saveAsBMP, exit);
+            this.getItems().addAll(openBMP, saveAsBMP, exit);
         }
 
         public MenuItem setOpenBMP(String name, ImageView imageView) {
@@ -259,6 +251,12 @@ public class Main extends Application {
 
             open.setOnAction(event -> {
                 FileChooser fileChooser = new FileChooser();
+                fileChooser.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("Windows Bitmap", "*.bmp")
+                );
+                fileChooser.setInitialDirectory(file.getParentFile());
+
+
                 //Set to user directory or go to default if cannot access
                 String userDirectoryString = System.getProperty("user.home");
                 File userDirectory = new File(userDirectoryString);
@@ -288,98 +286,6 @@ public class Main extends Application {
             return open;
         }
 
-//        public MenuItem setOpen(String name, ImageView imageView) {
-//            MenuItem open = new MenuItem(name, imageView);
-//
-//            open.setOnAction(event -> {
-//                FileChooser fileChooser = new FileChooser();
-//                //Set to user directory or go to default if cannot access
-//                String userDirectoryString = System.getProperty("user.home");
-//                File userDirectory = new File(userDirectoryString);
-//                if(!userDirectory.canRead()) {
-//                    userDirectory = new File("c:/");
-//                }
-//                fileChooser.setInitialDirectory(userDirectory);
-//
-//                file = fileChooser.showOpenDialog(pS);
-//                if (file != null) {
-//                    Image image1 = new Image(file.toURI().toString());
-//                    bufferedImage = SwingFXUtils.fromFXImage(image1, null);
-//                    iv1.setImage(image1);
-//                    addToHistory(bufferedImage, "New image");
-//                }
-//            });
-//
-//            return open;
-//        }
-//
-//        public MenuItem setOpenAs(int Type, String name, ImageView imageView) {
-//            MenuItem open = new MenuItem(name, imageView);
-//
-//            open.setOnAction(event -> {
-//                FileChooser fileChooser = new FileChooser();
-//                fileChooser.setTitle(name);
-//                //Set to user directory or go to default if cannot access
-//                String userDirectoryString = System.getProperty("user.home");
-//                File userDirectory = new File(userDirectoryString);
-//                if(!userDirectory.canRead()) {
-//                    userDirectory = new File("c:/");
-//                }
-//                fileChooser.setInitialDirectory(userDirectory);
-//
-//                file = fileChooser.showOpenDialog(pS);
-//                if (file != null) {
-//                    Image image1 = new Image(file.toURI().toString());
-//                    bufferedImage = SwingFXUtils.fromFXImage(image1, null);
-//                    BufferedImage image = new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(), Type);
-//                    Graphics graphics = image.getGraphics();
-//                    graphics.drawImage(bufferedImage, 0, 0, null);
-//                    graphics.dispose();
-//                    iv1.setImage(SwingFXUtils.toFXImage(image, null));
-//                    bufferedImage = image;
-//                    addToHistory(bufferedImage, "New image");
-//                }
-//            });
-//
-//            return open;
-//        }
-//
-//        public MenuItem setSave(String name, ImageView imageView) {
-//            MenuItem save = new MenuItem(name, imageView);
-//
-//            save.setOnAction(event -> {
-//                if (file != null) {
-//                    SaveImage saveImage = new SaveImage(file);
-//                    saveImage.save(bufferedImage);
-//                    addToHistory(bufferedImage, "Save image");
-//                }
-//            });
-//
-//            return save;
-//        }
-//
-//        public MenuItem setSaveAs(String name, ImageView imageView) {
-//            MenuItem save = new MenuItem(name, imageView);
-//
-//            save.setOnAction(event -> {
-//                FileChooser fileChooser = new FileChooser();
-//                fileChooser.getExtensionFilters().addAll(
-//                        new FileChooser.ExtensionFilter("All Images", "*.*"),
-//                        new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png"),
-//                        new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.jpg")
-//                );
-//                fileChooser.setInitialDirectory(file.getParentFile());
-//
-//                File file = fileChooser.showSaveDialog(pS);
-//                if (file != null) {
-//                    SaveImage saveImage = new SaveImage(file);
-//                    saveImage.save(bufferedImage);
-//                    addToHistory(bufferedImage, "Save image");
-//                }
-//            });
-//
-//            return save;
-//        }
 
         public MenuItem setSaveBMP(String name, ImageView imageView) {
             MenuItem save = new MenuItem(name, imageView);
@@ -401,10 +307,6 @@ public class Main extends Application {
                         e.printStackTrace();
                     }
 
-//                    BMPFile saveImage = new BMPFile(iBMP);
-//                    saveImage.saveBitmap(sDir);
-////                    SaveImage saveImage = new SaveImage(file);
-////                    saveImage.save(bufferedImage);
                     addToHistory(bufferedImage, "Save image");
                 }
             });

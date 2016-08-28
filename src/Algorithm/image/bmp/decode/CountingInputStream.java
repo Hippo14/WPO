@@ -1,4 +1,4 @@
-package Algorithm.BmpNew.decode;
+package Algorithm.image.bmp.decode;
 
 import java.io.FilterInputStream;
 import java.io.IOException;

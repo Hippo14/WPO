@@ -1,7 +1,7 @@
-package Algorithm.BmpNew.decode;
+package Algorithm.image.bmp.decode;
 
-import Algorithm.BmpNew.BmpHeader;
-import Algorithm.BmpNew.Pixel;
+import Algorithm.image.bmp.BmpHeader;
+import Algorithm.image.bmp.Pixel;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.IndexColorModel;

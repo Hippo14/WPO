@@ -1,7 +1,6 @@
-package Algorithm.BmpNew;
+package Algorithm.image.bmp;
 
-import Algorithm.BmpNew.decode.LitEndInputStream;
-import BMP.BMPFile;
+import Algorithm.image.bmp.decode.LitEndInputStream;
 
 import java.io.IOException;
 
@@ -26,10 +25,6 @@ public class BmpHeader {
     int numerOfColorsInImage;
     int numberOfImportantColors;
 
-    public BmpHeader() {
-
-    }
-
     public BmpHeader(BmpHeader header) {
         this.size = header.getSize();
         this.reserved1 = header.getReserved1();
@@ -52,19 +47,14 @@ public class BmpHeader {
         return numColors;
     }
 
-    public void setNumColors(int numColors) {
-        this.numColors = numColors;
-    }
-
     private int numColors;
-
-    public int getColorsImportant() {
-        return colorsImportant;
-    }
 
     int colorsImportant;
 
-    public BmpHeader(LitEndInputStream litEndInputStream) throws IOException {
+    public BmpHeader(LitEndInputStream input) throws IOException {
+        readFileHeader()
+
+
         init(litEndInputStream);
     }
 

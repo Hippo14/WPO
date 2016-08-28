@@ -1,10 +1,9 @@
-package Algorithm.BmpNew.encode;
+package Algorithm.image.bmp.encode;
 
-import Algorithm.BmpNew.BmpHeader;
-import Algorithm.BmpNew.LitEndOutputStream;
-import BMP.BMPFile;
+import Algorithm.image.bmp.BmpHeader;
+import Algorithm.image.bmp.LitEndOutputStream;
+import Algorithm.image.bmp.BMPFile;
 
-import java.awt.image.BufferedImage;
 import java.awt.image.IndexColorModel;
 import java.awt.image.WritableRaster;
 import java.io.*;
@@ -69,16 +68,75 @@ public class BmpEncode {
 
         writeFileHeader(fileSize, offset, bmpHeader,littleEndianOutputStream);
 
-//        bmpHeader.write(littleEndianOutputStream);
-
         if (bmpHeader.getBitsPerPixel() <= 8) writeColorMap(indexColorModel, littleEndianOutputStream);
 
         if (bmpHeader.getBitsPerPixel() == 1) write1(bmpFile.getBufferedImage().getRaster(), littleEndianOutputStream);
         else if (bmpHeader.getBitsPerPixel() == 4)  write4(bmpFile.getBufferedImage().getRaster(), littleEndianOutputStream);
-//        else if (bmpHeader.getBitsPerPixel() == 8)  write8(bmpFile.getBufferedImage().getRaster(), littleEndianOutputStream);
-//        else if (bmpHeader.getBitsPerPixel() == 24)  write24(bmpFile.getBufferedImage().getRaster(), littleEndianOutputStream);
-//        else if (bmpHeader.getBitsPerPixel() == 32)  write32(bmpFile.getBufferedImage().getRaster(),
-//                bmpFile.getBufferedImage().getAlphaRaster(), littleEndianOutputStream);
+        else if (bmpHeader.getBitsPerPixel() == 8)  write8(bmpFile.getBufferedImage().getRaster(), littleEndianOutputStream);
+        else if (bmpHeader.getBitsPerPixel() == 24)  write24(bmpFile.getBufferedImage().getRaster(), littleEndianOutputStream);
+        else if (bmpHeader.getBitsPerPixel() == 32)  write32(bmpFile.getBufferedImage().getRaster(),
+                bmpFile.getBufferedImage().getAlphaRaster(), littleEndianOutputStream);
+
+        // TEST
+        byte[] author = "Krzysztof Macioszek".getBytes("UTF-8");
+        littleEndianOutputStream.write(author);
+    }
+
+    private static void write32(WritableRaster raster, WritableRaster alphaRaster, LitEndOutputStream littleEndianOutputStream) throws IOException {
+        int width = raster.getWidth();
+        int height = raster.getHeight();
+
+        int bytesPerLine = getBytesPerLine24Bit(width);
+
+        for (int y = height - 1; y >= 0; y--) {
+            for (int x = 0; x < width; x++) {
+                int r = raster.getSample(x, y, 0);
+                int g = raster.getSample(x, y, 1);
+                int b = raster.getSample(x, y, 2);
+                int a = alphaRaster.getSample(x, y, 0);
+
+                littleEndianOutputStream.writeByte(b);
+                littleEndianOutputStream.writeByte(g);
+                littleEndianOutputStream.writeByte(r);
+                littleEndianOutputStream.writeByte(a);
+            }
+        }
+    }
+
+    private static void write24(WritableRaster raster, LitEndOutputStream littleEndianOutputStream) throws IOException {
+        int width = raster.getWidth();
+        int height = raster.getHeight();
+
+        int bytesPerLine = getBytesPerLine24Bit(width);
+
+        for (int y = height - 1; y >= 0; y--) {
+            for (int x = 0; x < width; x++) {
+                int r = raster.getSample(x, y, 0);
+                int g = raster.getSample(x, y, 1);
+                int b = raster.getSample(x, y, 2);
+
+                littleEndianOutputStream.writeByte(b);
+                littleEndianOutputStream.writeByte(g);
+                littleEndianOutputStream.writeByte(r);
+            }
+
+            for (int i = width * 3; i < bytesPerLine; i++) littleEndianOutputStream.writeByte(0);
+        }
+    }
+
+    private static void write8(WritableRaster raster, LitEndOutputStream littleEndianOutputStream) throws IOException {
+        int width = raster.getWidth();
+        int height = raster.getHeight();
+
+        int bytesPerLine = getBytesPerLine8Bit(width);
+
+        for (int y = height - 1; y >= 0; y--) {
+            for (int x = 0; x < width; x++) {
+                int index = raster.getSample(x, y, 0);
+                littleEndianOutputStream.writeByte(index);
+            }
+            for (int i = width; i < bytesPerLine; i++) littleEndianOutputStream.writeByte(0);
+        }
     }
 
     private static void write4(WritableRaster raster, LitEndOutputStream littleEndianOutputStream) throws IOException {
@@ -128,9 +186,12 @@ public class BmpEncode {
     }
 
     private static byte setBit(byte b, int i, int index) {
-        if (index == 0) b &= ~(1 << (7 - index));
-        else b |= 1 << (7 - index);
-
+        if (index == 0) {
+            b &= ~(1 << (7 - i));
+        }
+        else {
+            b |= 1 << (7 - i);
+        }
         return b;
     }
 

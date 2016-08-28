@@ -1,6 +1,6 @@
-package Algorithm.BmpNew;
+package Algorithm.image.bmp;
 
-import Algorithm.BmpNew.decode.LitEndInputStream;
+import Algorithm.image.bmp.decode.LitEndInputStream;
 
 import java.io.IOException;
 

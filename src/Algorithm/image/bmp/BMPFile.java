@@ -1,12 +1,6 @@
-package BMP;
+package Algorithm.image.bmp;
 
-import Algorithm.BmpNew.BmpHeader;
-
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.PixelGrabber;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 
 /**
  * Created by KMacioszek on 2016-06-27.
