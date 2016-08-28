@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="095f28bd-7526-43dc-b528-7bfc4a86f26f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Algorithm/utils/exceptions/BadSizeImageException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Algorithm/utils/exceptions/BadTypeImageException.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Algorithm/image/bmp/exceptions/UnknownFormatException.java" afterPath="$PROJECT_DIR$/src/Algorithm/utils/exceptions/UnknownFormatException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Algorithm/Algorithm.java" afterPath="$PROJECT_DIR$/src/Algorithm/Algorithm.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/Logical.java" afterPath="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/Logical.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalNegation.java" afterPath="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalNegation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalProduct.java" afterPath="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalProduct.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalSum.java" afterPath="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalSum.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalXOR.java" afterPath="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalXOR.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Algorithm/image/bmp/read/Read.java" afterPath="$PROJECT_DIR$/src/Algorithm/image/bmp/read/Read.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Algorithm/utils/RequiredImage.java" afterPath="$PROJECT_DIR$/src/Algorithm/utils/RequiredImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
     </list>
     <ignored path="WPO.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,10 +34,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
+            <state relative-caret-position="831">
               <caret line="1891" column="26" selection-start-line="1891" selection-start-column="26" selection-end-line="1891" selection-end-column="26" />
               <folding>
                 <element signature="method#setExit#0;class#MenuFile#0;class#Main#0" expanded="false" />
@@ -63,6 +51,26 @@
                 <element signature="class#MenuGrayArytm#0;class#Main#0" expanded="false" />
                 <element signature="class#MenuColorArytm#0;class#Main#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogicalSum.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalSum.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Logical.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/Logical.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="441">
+              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -126,9 +134,9 @@
         <option value="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalXOR.java" />
         <option value="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalSum.java" />
         <option value="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalProduct.java" />
-        <option value="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/Logical.java" />
         <option value="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalNegation.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/Logical.java" />
       </list>
     </option>
   </component>
@@ -752,12 +760,12 @@
       <option name="presentableId" value="Default" />
       <updated>1472383342965</updated>
       <workItem from="1472383346414" duration="2925000" />
-      <workItem from="1472389915920" duration="12880000" />
+      <workItem from="1472389915920" duration="13389000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15805000" />
+    <option name="totallyTimeSpent" value="16314000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1176" extended-state="6" />
@@ -770,7 +778,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -848,8 +856,14 @@
           <properties />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/Logical.java</url>
+          <line>29</line>
+          <properties />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="19" />
+      <option name="time" value="20" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1228,31 +1242,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalSum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalProduct.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
           <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/Logical.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="62" column="5" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
-          <folding>
-            <element signature="e#2241#2242#0" expanded="true" />
-            <element signature="e#2277#2278#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1269,7 +1264,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
+        <state relative-caret-position="831">
           <caret line="1891" column="26" selection-start-line="1891" selection-start-column="26" selection-end-line="1891" selection-end-column="26" />
           <folding>
             <element signature="method#setExit#0;class#MenuFile#0;class#Main#0" expanded="false" />
@@ -1283,6 +1278,22 @@
             <element signature="class#MenuGrayArytm#0;class#Main#0" expanded="false" />
             <element signature="class#MenuColorArytm#0;class#Main#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/LogicalSum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Algorithm/bin_oper_logicz/Logical.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

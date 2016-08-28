@@ -32,6 +32,8 @@ public abstract class Logical extends Algorithm {
         this.firstRaster = this.firstImage.getBufferedImage().getRaster();
         this.secondRaster = this.secondImage.getBufferedImage().getRaster();
 
+        this.templateImage = setBinaryImage(this.firstImage.getBufferedImage());
+
         if (firstImage.getBmpHeader().getWidth() == secondImage.getBmpHeader().getWidth() && firstImage.getBmpHeader().getHeight() == secondImage.getBmpHeader().getHeight()) {
             if (RequiredImage.checkImage(firstImage, Contants.BITS_1) || RequiredImage.checkImage(secondImage, Contants.BITS_1))
                 if (firstImage != null && secondImage != null)
@@ -44,6 +46,7 @@ public abstract class Logical extends Algorithm {
     public Logical(BMPFile firstImage) throws BadTypeImageException {
         this.firstImage = firstImage;
         this.firstRaster = this.firstImage.getBufferedImage().getRaster();
+
         this.templateImage = setBinaryImage(this.firstImage.getBufferedImage());
 
         if (RequiredImage.checkImage(firstImage, Contants.BITS_1))
