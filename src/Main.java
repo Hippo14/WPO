@@ -1,5 +1,5 @@
 import Algorithm.image.bmp.read.Read;
-import Algorithm.image.bmp.encode.BmpEncode;
+import Algorithm.image.bmp.write.Write;
 import Algorithm.bin_morf.*;
 import Algorithm.bin_oper_logicz.LogicalNegation;
 import Algorithm.bin_oper_logicz.LogicalProduct;
@@ -64,6 +64,7 @@ public class Main extends Application {
     public BMPFile bmpFile;
 
     Read read;
+    Write write;
 
     public static void main(String[] args) {
         launch(args);
@@ -270,9 +271,11 @@ public class Main extends Application {
                         dis = new DataInputStream(new FileInputStream(sDir));
 
                         read = new Read(dis);
-                        bmpFile = new BMPFile(read.getHeader(), read.getImage());
+                        bmpFile = read.getBMP();
                         iv1.setImage(SwingFXUtils.toFXImage(bmpFile.getBufferedImage(), null));
                         addToHistory(bmpFile.getBufferedImage(), "New BMP image");
+
+                        bufferedImage = bmpFile.getBufferedImage();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -297,8 +300,10 @@ public class Main extends Application {
                 if (file != null && bmpFile != null) {
                     String sDir = file.toURI().getPath();
 
+                    Write write = new Write();
+
                     try {
-                        BmpEncode.write(bmpFile, file);
+                        write.write(bmpFile, file);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

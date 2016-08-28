@@ -1,6 +1,7 @@
 package Algorithm.image.bmp;
 
 import Algorithm.image.bmp.read.LitEndInputStream;
+import Algorithm.image.bmp.write.LitEndOutputStream;
 
 import java.io.IOException;
 

@@ -1,6 +1,7 @@
 package Algorithm.image.bmp.bits;
 
 import Algorithm.image.bmp.BmpHeader;
+import Algorithm.image.bmp.write.LitEndOutputStream;
 import Algorithm.image.bmp.read.LitEndInputStream;
 
 import java.awt.image.BufferedImage;
@@ -32,6 +33,31 @@ public class Bit32 extends Bit {
         }
 
         return bufferedImage;
+    }
+
+    public static void write(WritableRaster raster, WritableRaster alphaRaster, LitEndOutputStream input) throws IOException {
+        int width = raster.getWidth();
+        int height = raster.getHeight();
+
+        int bytesPerLine = getBytesPerLine(width);
+
+        for (int y = height - 1; y >= 0; y--) {
+            for (int x = 0; x < width; x++) {
+                int r = raster.getSample(x, y, 0);
+                int g = raster.getSample(x, y, 1);
+                int b = raster.getSample(x, y, 2);
+                int a = alphaRaster.getSample(x, y, 0);
+
+                input.writeByte(b);
+                input.writeByte(g);
+                input.writeByte(r);
+                input.writeByte(a);
+            }
+        }
+    }
+
+    public static int getBytesPerLine(int width) {
+        return width * 4;
     }
 
 }

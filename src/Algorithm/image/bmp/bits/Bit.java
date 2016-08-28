@@ -13,4 +13,18 @@ public class Bit {
         return (n >> (4 * (1 - i))) & 0xF;
     }
 
+    protected static byte setBit(byte b, int i, int index) {
+        if (index == 0) {
+            b &= ~(1 << (7 - i));
+        }
+        else {
+            b |= 1 << (7 - i);
+        }
+        return b;
+    }
+
+    protected static byte setNibble(byte b, int i, int index) {
+        return b |= (index << ((1 - i) * 4));
+    }
+
 }

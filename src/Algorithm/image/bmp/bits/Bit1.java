@@ -1,6 +1,7 @@
 package Algorithm.image.bmp.bits;
 
 import Algorithm.image.bmp.BmpHeader;
+import Algorithm.image.bmp.write.LitEndOutputStream;
 import Algorithm.image.bmp.Pixel;
 import Algorithm.image.bmp.read.LitEndInputStream;
 
@@ -51,6 +52,32 @@ public class Bit1 extends Bit {
         }
 
         return bufferedImage;
+    }
+
+    public static void write(WritableRaster raster, LitEndOutputStream input) throws IOException {
+        int bytesPerLine = getBytesPerLine(raster.getWidth());
+
+        byte[] line = new byte[bytesPerLine];
+
+        for (int y = raster.getHeight() - 1; y >=0; y--) {
+            for (int i = 0; i < bytesPerLine; i++) line[i] = 0;
+
+            for (int x = 0; x < raster.getWidth(); x++) {
+                int bi = x / 8;
+                int i = x % 8;
+                int index = raster.getSample(x, y, 0);
+                line[bi] = setBit(line[bi], i, index);
+            }
+
+            input.write(line);
+        }
+    }
+
+    public static int getBytesPerLine(int width) {
+        int bytesPerLine = width / 8;
+        if (bytesPerLine * 8 < width) bytesPerLine++;
+        if (bytesPerLine % 4 != 0) bytesPerLine = ( bytesPerLine / 4 + 1 ) * 4;
+        return bytesPerLine;
     }
 
 }

@@ -1,5 +1,6 @@
 package Algorithm.image.bmp.read;
 
+import Algorithm.image.bmp.BMPFile;
 import Algorithm.image.bmp.BmpHeader;
 import Algorithm.image.bmp.Pixel;
 import Algorithm.image.bmp.bits.*;
@@ -61,5 +62,9 @@ public class Read {
     public BmpHeader getHeader() {
         return header;
 
+    }
+
+    public BMPFile getBMP() {
+        return new BMPFile(header, image);
     }
 }
