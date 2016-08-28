@@ -1,5 +1,7 @@
 package Algorithm.bin_oper_logicz;
 
+import Algorithm.image.bmp.BMPFile;
+
 import java.awt.image.BufferedImage;
 
 /**

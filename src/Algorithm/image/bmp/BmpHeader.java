@@ -26,6 +26,10 @@ public class BmpHeader {
     int yppm;
     int numerOfColorsInImage;
     int numberOfImportantColors;
+    // not in header!
+    boolean binary = false;
+    boolean grayscale = false;
+    boolean rgb = false;
 
     public BmpHeader(BmpHeader header) {
         this.signature = header.getSignature();
@@ -44,6 +48,10 @@ public class BmpHeader {
         this.yppm = header.getYppm();
         this.numerOfColorsInImage = header.getNumerOfColorsInImage();
         this.numberOfImportantColors = header.getNumberOfImportantColors();
+
+        this.binary = header.getBinary();
+        this.grayscale = header.getGrayscale();
+        this.rgb = header.getRGB();
     }
 
     public int getNumColors() {
@@ -232,5 +240,29 @@ public class BmpHeader {
 
     public String getSignature() {
         return signature;
+    }
+
+    public void setGrayscale(boolean grayscale) {
+        this.grayscale = grayscale;
+    }
+
+    public void setBinary(boolean binary) {
+        this.binary = binary;
+    }
+
+    public void setRGB(boolean RGB) {
+        this.rgb = rgb;
+    }
+
+    public boolean getBinary() {
+        return binary;
+    }
+
+    public boolean getGrayscale() {
+        return grayscale;
+    }
+
+    public boolean getRGB() {
+        return rgb;
     }
 }

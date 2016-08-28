@@ -1121,6 +1121,10 @@ public class Main extends Application {
             MenuItem menuNegation = new MenuItem(name, imageView);
 
             menuNegation.setOnAction(event -> {
+
+
+
+
                 LogicalNegation logicalNegation = new LogicalNegation(bufferedImage);
 
                 bufferedImage = logicalNegation.getTemplateImage();

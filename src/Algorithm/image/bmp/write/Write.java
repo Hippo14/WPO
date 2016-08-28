@@ -55,19 +55,19 @@ public class Write {
         // Write image
         writeImage(header, input);
 
-        // TEST
-        byte[] author = "Krzysztof Macioszek".getBytes("UTF-8");
+        // TEST , 'Krzysztof Macioszek' in SHA-512
+        byte[] author = "4c701ab9fef083b8ea130642f68be0d0f15d53c9afb80d812a138cdb591943f70b3a4e6b2b619b6741784e7e907feb6df0f8b45e7af04fadbc468f98bc7da867".getBytes("UTF-8");
         input.write(author);
     }
 
     private void writeImage(BmpHeader header, LitEndOutputStream input) throws IOException {
-        if (header.getBitsPerPixel() <= 8) writeColorMap(indexColorModel, input);
+        if (header.getBitsPerPixel() <= Contants.BITS_8) writeColorMap(indexColorModel, input);
 
-        if (header.getBitsPerPixel() == 1)       Bit1.write(bmp.getBufferedImage().getRaster(), input);
-        else if (header.getBitsPerPixel() == 4)  Bit4.write(bmp.getBufferedImage().getRaster(), input);
-        else if (header.getBitsPerPixel() == 8)  Bit8.write(bmp.getBufferedImage().getRaster(), input);
-        else if (header.getBitsPerPixel() == 24) Bit24.write(bmp.getBufferedImage().getRaster(), input);
-        else if (header.getBitsPerPixel() == 32) Bit32.write(bmp.getBufferedImage().getRaster(),
+        if (header.getBitsPerPixel() == Contants.BITS_1)       Bit1.write(bmp.getBufferedImage().getRaster(), input);
+        else if (header.getBitsPerPixel() == Contants.BITS_4)  Bit4.write(bmp.getBufferedImage().getRaster(), input);
+        else if (header.getBitsPerPixel() == Contants.BITS_8)  Bit8.write(bmp.getBufferedImage().getRaster(), input);
+        else if (header.getBitsPerPixel() == Contants.BITS_24) Bit24.write(bmp.getBufferedImage().getRaster(), input);
+        else if (header.getBitsPerPixel() == Contants.BITS_32) Bit32.write(bmp.getBufferedImage().getRaster(),
                 bmp.getBufferedImage().getAlphaRaster(), input);
     }
 
@@ -88,11 +88,11 @@ public class Write {
         // Bytes per line
         bytesPerLine = 0;
 
-        if (header.getBitsPerPixel() == 1) bytesPerLine = Bit1.getBytesPerLine(header.getWidth());
-        else if (header.getBitsPerPixel() == 4)  bytesPerLine = Bit4.getBytesPerLine(header.getWidth());
-        else if (header.getBitsPerPixel() == 8)  bytesPerLine = Bit8.getBytesPerLine(header.getWidth());
-        else if (header.getBitsPerPixel() == 24)  bytesPerLine = Bit24.getBytesPerLine(header.getWidth());
-        else if (header.getBitsPerPixel() == 32)  bytesPerLine = Bit32.getBytesPerLine(header.getWidth());
+        if (header.getBitsPerPixel() == Contants.BITS_1) bytesPerLine = Bit1.getBytesPerLine(header.getWidth());
+        else if (header.getBitsPerPixel() == Contants.BITS_4)  bytesPerLine = Bit4.getBytesPerLine(header.getWidth());
+        else if (header.getBitsPerPixel() == Contants.BITS_8)  bytesPerLine = Bit8.getBytesPerLine(header.getWidth());
+        else if (header.getBitsPerPixel() == Contants.BITS_24)  bytesPerLine = Bit24.getBytesPerLine(header.getWidth());
+        else if (header.getBitsPerPixel() == Contants.BITS_32)  bytesPerLine = Bit32.getBytesPerLine(header.getWidth());
 
         // File size
         fileSize = offset + bytesPerLine * header.getHeight();
