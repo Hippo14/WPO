@@ -4,7 +4,7 @@ import Algorithm.image.bmp.BMPFile;
 import Algorithm.image.bmp.BmpHeader;
 import Algorithm.image.bmp.Pixel;
 import Algorithm.image.bmp.bits.*;
-import Algorithm.image.bmp.exceptions.UnknownFormatException;
+import Algorithm.utils.exceptions.UnknownFormatException;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

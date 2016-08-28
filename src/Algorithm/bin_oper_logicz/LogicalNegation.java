@@ -1,6 +1,7 @@
 package Algorithm.bin_oper_logicz;
 
 import Algorithm.image.bmp.BMPFile;
+import Algorithm.utils.exceptions.BadTypeImageException;
 
 import java.awt.image.BufferedImage;
 
@@ -9,8 +10,8 @@ import java.awt.image.BufferedImage;
  */
 public class LogicalNegation extends Logical {
 
-    public LogicalNegation(BufferedImage bufferedImage) {
-        super(bufferedImage);
+    public LogicalNegation(BMPFile firstImage) throws BadTypeImageException {
+        super(firstImage);
 
         run();
     }
@@ -23,5 +24,6 @@ public class LogicalNegation extends Logical {
         else
             templateImage.setRGB(x, y, 0xff000000);
     }
+
 
 }

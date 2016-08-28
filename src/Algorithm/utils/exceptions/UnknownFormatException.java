@@ -1,4 +1,4 @@
-package Algorithm.image.bmp.exceptions;
+package Algorithm.utils.exceptions;
 
 import java.io.IOException;
 

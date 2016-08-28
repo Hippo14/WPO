@@ -1,6 +1,9 @@
 package Algorithm.bin_oper_logicz;
 
 import Algorithm.Algorithm;
+import Algorithm.image.bmp.BMPFile;
+import Algorithm.utils.exceptions.BadSizeImageException;
+import Algorithm.utils.exceptions.BadTypeImageException;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
@@ -10,13 +13,13 @@ import java.awt.image.Raster;
  */
 public class LogicalSum extends Logical {
 
-    public LogicalSum(BufferedImage firstImage, BufferedImage secondImage) {
+    public LogicalSum(BMPFile firstImage, BMPFile secondImage) throws BadSizeImageException, BadTypeImageException {
         super(firstImage, secondImage);
     }
 
     @Override
     public void makeAlgorithm(int x, int y) {
-        if (x < secondImage.getWidth() && y < secondImage.getHeight()) {
+        if (x < templateImage.getWidth() && y < templateImage.getHeight()) {
             int sum = firstRaster.getSample(x, y, 0) | secondRaster.getSample(x, y, 0);
 
             if (sum == 0)

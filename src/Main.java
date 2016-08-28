@@ -1,4 +1,6 @@
-import Algorithm.image.bmp.exceptions.UnknownFormatException;
+import Algorithm.utils.exceptions.BadSizeImageException;
+import Algorithm.utils.exceptions.BadTypeImageException;
+import Algorithm.utils.exceptions.UnknownFormatException;
 import Algorithm.image.bmp.read.Read;
 import Algorithm.image.bmp.write.Write;
 import Algorithm.bin_morf.*;
@@ -254,18 +256,7 @@ public class Main extends Application {
             MenuItem open = new MenuItem(name, imageView);
 
             open.setOnAction(event -> {
-                FileChooser fileChooser = new FileChooser();
-
-
-                //Set to user directory or go to default if cannot access
-                String userDirectoryString = System.getProperty("user.home");
-                File userDirectory = new File(userDirectoryString);
-                if(!userDirectory.canRead()) {
-                    userDirectory = new File("c:/");
-                }
-                fileChooser.setInitialDirectory(userDirectory);
-
-                file = fileChooser.showOpenDialog(pS);
+                file = chooseFile().showOpenDialog(pS);
 
                 if (file != null) {
                     String sDir = file.toURI().getPath();
@@ -301,15 +292,13 @@ public class Main extends Application {
 
             save.setOnAction(event -> {
                 FileChooser fileChooser = new FileChooser();
-                fileChooser.getExtensionFilters().addAll(
-                        new FileChooser.ExtensionFilter("BMP files (*.bmp)", "*.bmp")
-                );
+                FileChooser.ExtensionFilter extFilter =
+                        new FileChooser.ExtensionFilter("Windows bitmap", "*.bmp");
+                fileChooser.getExtensionFilters().add(extFilter);
                 fileChooser.setInitialDirectory(file.getParentFile());
 
                 File file = fileChooser.showSaveDialog(pS);
                 if (file != null && bmpFile != null) {
-                    String sDir = file.toURI().getPath();
-
                     Write write = new Write();
 
                     try {
@@ -1143,15 +1132,18 @@ public class Main extends Application {
             MenuItem menuNegation = new MenuItem(name, imageView);
 
             menuNegation.setOnAction(event -> {
+                LogicalNegation logicalNegation = null;
+                try {
+                    logicalNegation = new LogicalNegation(bmpFile);
+                    bmpFile.setBufferedImage(logicalNegation.getTemplateImage());
 
-
-
-
-                LogicalNegation logicalNegation = new LogicalNegation(bufferedImage);
-
-                bufferedImage = logicalNegation.getTemplateImage();
-                iv1.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
-                addToHistory(bufferedImage, "Binary logicalNegation");
+                    bufferedImage = bmpFile.getBufferedImage();
+                    iv1.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
+                    addToHistory(bufferedImage, "Binary logical negation");
+                } catch (Exception e) {
+                    popUpDialog(e.toString());
+                    e.printStackTrace();
+                }
             });
 
             return menuNegation;
@@ -1161,21 +1153,24 @@ public class Main extends Application {
             MenuItem menuLogicalSum = new MenuItem(name, imageView);
 
             menuLogicalSum.setOnAction(event -> {
-                BufferedImage secondImage = null;
+                BMPFile firstImage = bmpFile;
+                BMPFile secondImage = null;
 
-                FileChooser fileChooser = new FileChooser();
-                fileChooser.setInitialDirectory(file.getParentFile());
+                file = chooseFile().showOpenDialog(pS);
 
-                file = fileChooser.showOpenDialog(pS);
                 if (file != null) {
-                    Image image1 = new Image(file.toURI().toString());
-                    secondImage = SwingFXUtils.fromFXImage(image1, null);
+                    try {
+                        secondImage = new Read(new DataInputStream(new FileInputStream(file.toURI().getPath()))).getBMP();
 
-                    LogicalSum logicalSum = new LogicalSum(bufferedImage, secondImage);
-
-                    bufferedImage = logicalSum.getTemplateImage();
-                    iv1.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
-                    addToHistory(bufferedImage, "Logical sum");
+                        LogicalSum logicalSum = new LogicalSum(firstImage, secondImage);
+                        bmpFile.setBufferedImage(logicalSum.getTemplateImage());
+                        bufferedImage = bmpFile.getBufferedImage();
+                        iv1.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
+                        addToHistory(bufferedImage, "Logical sum");
+                    } catch (Exception e) {
+                        popUpDialog(e.toString());
+                        e.printStackTrace();
+                    }
                 }
             });
 
@@ -1186,23 +1181,25 @@ public class Main extends Application {
             MenuItem menuLogicalProduct = new MenuItem(name, imageView);
 
             menuLogicalProduct.setOnAction(event -> {
-                BufferedImage secondImage = null;
+                BMPFile firstImage = bmpFile;
+                BMPFile secondImage = null;
 
-                FileChooser fileChooser = new FileChooser();
-                fileChooser.setInitialDirectory(file.getParentFile());
+                file = chooseFile().showOpenDialog(pS);
 
-                file = fileChooser.showOpenDialog(pS);
                 if (file != null) {
-                    Image image1 = new Image(file.toURI().toString());
-                    secondImage = SwingFXUtils.fromFXImage(image1, null);
+                    try {
+                        secondImage = new Read(new DataInputStream(new FileInputStream(file.toURI().getPath()))).getBMP();
 
-                    LogicalProduct logicalProduct = new LogicalProduct(bufferedImage, secondImage);
-
-                    bufferedImage = logicalProduct.getTemplateImage();
-                    iv1.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
-                    addToHistory(bufferedImage, "Logical product");
+                        LogicalProduct logicalProduct = new LogicalProduct(firstImage, secondImage);
+                        bmpFile.setBufferedImage(logicalProduct.getTemplateImage());
+                        bufferedImage = bmpFile.getBufferedImage();
+                        iv1.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
+                        addToHistory(bufferedImage, "Logical product");
+                    } catch (Exception e) {
+                        popUpDialog(e.toString());
+                        e.printStackTrace();
+                    }
                 }
-
             });
 
             return menuLogicalProduct;
@@ -1212,23 +1209,25 @@ public class Main extends Application {
             MenuItem menuXOR = new MenuItem(name, imageView);
 
             menuXOR.setOnAction(event -> {
-                BufferedImage secondImage = null;
+                BMPFile firstImage = bmpFile;
+                BMPFile secondImage = null;
 
-                FileChooser fileChooser = new FileChooser();
-                fileChooser.setInitialDirectory(file.getParentFile());
+                file = chooseFile().showOpenDialog(pS);
 
-                file = fileChooser.showOpenDialog(pS);
                 if (file != null) {
-                    Image image1 = new Image(file.toURI().toString());
-                    secondImage = SwingFXUtils.fromFXImage(image1, null);
+                    try {
+                        secondImage = new Read(new DataInputStream(new FileInputStream(file.toURI().getPath()))).getBMP();
 
-                    LogicalXOR logicalXOR = new LogicalXOR(bufferedImage, secondImage);
-
-                    bufferedImage = logicalXOR.getTemplateImage();
-                    iv1.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
-                    addToHistory(bufferedImage, "Logical XOR");
+                        LogicalXOR logicalXOR = new LogicalXOR(firstImage, secondImage);
+                        bmpFile.setBufferedImage(logicalXOR.getTemplateImage());
+                        bufferedImage = bmpFile.getBufferedImage();
+                        iv1.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
+                        addToHistory(bufferedImage, "Logical XOR");
+                    } catch (Exception e) {
+                        popUpDialog(e.toString());
+                        e.printStackTrace();
+                    }
                 }
-
             });
 
             return menuXOR;
@@ -1875,5 +1874,21 @@ public class Main extends Application {
 
             return menuImageLog;
         }
+    }
+
+    private FileChooser chooseFile() {
+        FileChooser fileChooser = new FileChooser();
+        //Set to user directory or go to default if cannot access
+        String userDirectoryString = System.getProperty("user.home");
+        File userDirectory = new File(userDirectoryString);
+        if(!userDirectory.canRead()) {
+            userDirectory = new File("c:/");
+        }
+        fileChooser.setInitialDirectory(userDirectory);
+        FileChooser.ExtensionFilter extFilter =
+                new FileChooser.ExtensionFilter("Windows bitmap", "*.bmp");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        return fileChooser;
     }
 }

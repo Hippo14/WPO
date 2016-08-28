@@ -16,6 +16,10 @@ public abstract class Algorithm {
     protected BufferedImage grayImage;
     protected BufferedImage filterImage;
 
+    public Algorithm() {
+
+    }
+
     public Algorithm(BufferedImage bufferedImage) {
         this.bufferedImage = bufferedImage;
 
