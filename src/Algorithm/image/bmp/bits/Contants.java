@@ -10,4 +10,7 @@ public class Contants {
     public static final int BITS_8 = 8;
     public static final int BITS_24 = 24;
     public static final int BITS_32 = 32;
+
+    public static final int BITS_4_GRAY = 44;
+    public static final int BITS_8_GRAY = 88;
 }

@@ -1,3 +1,4 @@
+import Algorithm.image.bmp.exceptions.UnknownFormatException;
 import Algorithm.image.bmp.read.Read;
 import Algorithm.image.bmp.write.Write;
 import Algorithm.bin_morf.*;
@@ -38,7 +39,9 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -276,7 +279,14 @@ public class Main extends Application {
                         addToHistory(bmpFile.getBufferedImage(), "New BMP image");
 
                         bufferedImage = bmpFile.getBufferedImage();
-                    } catch (Exception e) {
+                    } catch (UnknownFormatException e) {
+                        popUpDialog(e.toString());
+                        e.printStackTrace();
+                    } catch (FileNotFoundException e) {
+                        popUpDialog(e.toString());
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        popUpDialog(e.toString());
                         e.printStackTrace();
                     }
                 }
@@ -305,6 +315,7 @@ public class Main extends Application {
                     try {
                         write.write(bmpFile, file);
                     } catch (IOException e) {
+                        popUpDialog(e.toString());
                         e.printStackTrace();
                     }
 
@@ -325,6 +336,17 @@ public class Main extends Application {
 
             return exit;
         }
+    }
+
+    private void popUpDialog(String alert) {
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(pS);
+        VBox dialogVbox = new VBox(20);
+        dialogVbox.getChildren().add(new Text(alert));
+        Scene dialogScene = new Scene(dialogVbox, 300, 50);
+        dialog.setScene(dialogScene);
+        dialog.show();
     }
 
     public class MenuGeometric extends MyMenu {

@@ -4,6 +4,7 @@ import Algorithm.image.bmp.BMPFile;
 import Algorithm.image.bmp.BmpHeader;
 import Algorithm.image.bmp.Pixel;
 import Algorithm.image.bmp.bits.*;
+import Algorithm.image.bmp.exceptions.UnknownFormatException;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class Read {
         else if (header.getBitsPerPixel() == Contants.BITS_8 && header.getCompressionType() == 0) return Bit8.read(header, input, pixels);
         else if (header.getBitsPerPixel() == Contants.BITS_24 && header.getCompressionType() == 0) return Bit24.read(header, input);
         else if (header.getBitsPerPixel() == Contants.BITS_32 && header.getCompressionType() == 0) return Bit32.read(header, input);
-        else throw new IOException("Nieznany format bmp: bitCount= " + header.getBitsPerPixel() + ", compression= " + header.getCompressionType());
+        else throw new UnknownFormatException("Nieznany format bmp: bitCount= " + header.getBitsPerPixel() + ", compression= " + header.getCompressionType());
     }
 
     private boolean checkGrayscale(Pixel[] pixels) {
